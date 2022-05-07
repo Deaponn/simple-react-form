@@ -1,12 +1,12 @@
-import { Form } from "react-final-form";
+import MyForm from './components/MyForm' 
 import "./App.css";
 
 const sendRequest = () => {
-    console.log("reaquest sent");
+    console.log("request sent");
 };
 
 function App() {
-    return <Form onSubmit={sendRequest} render={() => <div>successful test</div>} />;
+    return <MyForm handleSubmit={sendRequest} />;
 }
 
 export default App;
