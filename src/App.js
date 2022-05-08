@@ -1,6 +1,6 @@
 import MyForm from "./components/MyForm";
 import Overlay from "./components/Overlay";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 const fillPrepTime = (value) => {
@@ -12,6 +12,9 @@ const fillPrepTime = (value) => {
 
 function App() {
     const [returnedData, setReturnedData] = useState({ __myUniqueHide: true });
+    useEffect(() => {
+        document.title = "Simple form";
+    }, []);
 
     const sendRequest = async (values) => {
         const URL = "https://frosty-wood-6558.getsandbox.com/dishes";
@@ -27,7 +30,7 @@ function App() {
             },
             body: JSON.stringify(values),
         });
-        const responseData = await response.json()
+        const responseData = await response.json();
         setReturnedData(responseData);
     };
 
