@@ -1,4 +1,6 @@
-import { Field } from "react-final-form";
+import SoupDetails from "./SoupDetails";
+import PizzaDetails from "./PizzaDetails";
+import SandwichDetails from "./SandwichDetails";
 import "./Details.css";
 
 const normalizeInteger = (value) => {
@@ -16,79 +18,13 @@ const normalizeFloat = (value) => {
 
 const conditionalRequired = (isActive) => (isActive ? (value) => (value ? undefined : "Required") : () => undefined);
 
-function Details({ which }) {
+function Details({ which, formValues }) {
     if (which === "") return null;
     if (which === "pizza")
-        return (
-            <>
-                <div>
-                    <label>Number of slices: </label>
-                    <Field
-                        name="number_of_slices"
-                        parse={normalizeInteger}
-                        validate={conditionalRequired(which === "pizza")}
-                        render={({ input, meta }) => {
-                            return (
-                                <>
-                                    <input type="text" min="1" {...input} />{meta.error && meta.touched && <span>{meta.error}</span>}
-                                </>
-                            );
-                        }}
-                    />
-                </div>
-                <div>
-                    <label>Diameter: </label>
-                    <Field
-                        name="diameter"
-                        parse={normalizeFloat}
-                        validate={conditionalRequired(which === "pizza")}
-                        render={({ input, meta }) => {
-                            return (
-                                <>
-                                    <input type="text" {...input} />{meta.error && meta.touched && <span>{meta.error}</span>}
-                                </>
-                            );
-                        }}
-                    />
-                </div>
-            </>
-        );
-    if (which === "soup")
-        return (
-            <div>
-                <label>Spiciness scale: </label>
-                <Field
-                    name="spiciness_scale"
-                    validate={conditionalRequired(which === "soup")}
-                    render={({ input, meta }) => {
-                        return (
-                            <>
-                                <input type="range" min="0" max="10" {...input} />{meta.error && meta.touched && <span>{meta.error}</span>}
-                            </>
-                        );
-                    }}
-                />
-            </div>
-        );
+        return <PizzaDetails slices={formValues ? formValues.no_of_slices : 0} diameter={formValues ? formValues.diameter : 0} normalizeInteger={normalizeInteger} normalizeFloat={normalizeFloat} require={conditionalRequired(which === "pizza")} />;
+    if (which === "soup") return <SoupDetails spiciness={formValues ? formValues.spiciness_scale : 0} require={conditionalRequired(which === "soup")} />;
     if (which === "sandwich")
-        return (
-            <div>
-                <label>Slices of bread: </label>
-                <Field
-                    name="slices_of_bread"
-                    parse={normalizeInteger}
-                    validate={conditionalRequired(which === "sandwich")}
-                    render={({ input, meta }) => {
-                        return (
-                            <>
-                                <input type="text" {...input} />
-                                {meta.error && meta.touched && <span>{meta.error}</span>}
-                            </>
-                        );
-                    }}
-                />
-            </div>
-        );
+        return <SandwichDetails slices={formValues ? formValues.slices_of_bread : 0} normalizeInteger={normalizeInteger} require={conditionalRequired(which === "sandwich")} />;
 }
 
 export default Details;

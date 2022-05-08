@@ -1,6 +1,7 @@
 import { Form, Field } from "react-final-form";
 import Details from "./Details";
 import "./MyForm.css";
+import RequiredInfo from "./RequiredInfo";
 
 const normalizePrepTime = (value) => {
     if (!value) return value;
@@ -34,7 +35,7 @@ function MyForm({ handleSubmit }) {
                             render={({ input, meta }) => (
                                 <>
                                     <input type="text" placeholder="dish name" {...input} />
-                                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                                    <RequiredInfo meta={meta} />
                                 </>
                             )}
                         />
@@ -48,7 +49,7 @@ function MyForm({ handleSubmit }) {
                             render={({ input, meta }) => (
                                 <>
                                     <input type="text" placeholder="00:00:00" {...input} />
-                                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                                    <RequiredInfo meta={meta} />
                                 </>
                             )}
                         />
@@ -67,19 +68,21 @@ function MyForm({ handleSubmit }) {
                                             <option value="soup">Soup</option>
                                             <option value="sandwich">Sandwich</option>
                                         </select>
-                                        {meta.error && meta.touched && <span>{meta.error}</span>}
+                                    <RequiredInfo meta={meta} />
                                     </>
                                 );
                             }}
                         ></Field>
                     </div>
-                    <Details which={values.type ? values.type : ""} />
-                    <button type="submit" disabled={submitting || pristine}>
-                        Submit
-                    </button>
-                    <button type="button" onClick={form.reset} disabled={submitting || pristine}>
-                        Reset
-                    </button>
+                    <Details which={values.type ? values.type : ""} formValues={values} />
+                    <div className="buttons">
+                        <button type="submit" disabled={submitting || pristine}>
+                            Submit
+                        </button>
+                        <button type="button" onClick={form.reset} disabled={submitting || pristine}>
+                            Reset
+                        </button>
+                    </div>
                 </form>
             )}
         />

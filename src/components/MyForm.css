@@ -1,0 +1,39 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form > div {
+    width: min(90vw, 500px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    position: relative;
+}
+
+input, select, button {
+    background-color: #FCEC88;
+    border: 3px solid #FFC499;
+    border-radius: 3px;
+    padding-left: 5px;
+    font-size: 16px;
+}
+
+.buttons {
+    justify-content: space-around;
+}
+
+button {
+    height: 30px;
+    width: 100px;
+    cursor: pointer;
+    transition: background-color 0.5s, border 0.5s, collor 0.5s;
+}
+
+button:disabled {
+    background-color: #FEF9D7;
+    border: 3px solid #FFDBC2;
+    cursor: not-allowed;
+}

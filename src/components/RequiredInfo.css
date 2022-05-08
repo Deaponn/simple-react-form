@@ -1,0 +1,27 @@
+.required-indicator {
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 8px;
+    color: black;
+    border-radius: 50%;
+    transition: width 0.5s, border-radius 0.5s;
+    overflow: hidden;
+}
+
+.required-indicator:hover {
+    width: 90px;
+    border-radius: 10px;
+}
+
+.message {
+    display: none;
+}
+
+.required-indicator:hover .message {
+    display: block;
+}
