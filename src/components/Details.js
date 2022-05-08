@@ -5,13 +5,13 @@ import "./Details.css";
 
 const normalizeInteger = (value) => {
     if (!value) return value;
-    if (isNaN(value.at(-1))) return value.substring(0, value.length - 1);
+    if (isNaN(value[value.length - 1])) return value.substring(0, value.length - 1);
     return value;
 };
 
 const normalizeFloat = (value) => {
     if (!value) return value;
-    if ((value.at(-1) === "." && value.substring(0, value.length - 1).includes(".")) || (value.at(-1) !== "." && isNaN(value.at(-1))))
+    if ((value[value.length - 1] === "." && value.substring(0, value.length - 1).includes(".")) || (value[value.length - 1] !== "." && isNaN(value[value.length - 1])))
         return value.substring(0, value.length - 1);
     return value;
 };

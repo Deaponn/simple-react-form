@@ -4,16 +4,19 @@ import "./MyForm.css";
 import RequiredInfo from "./RequiredInfo";
 
 const normalizePrepTime = (value) => {
+    const value_right_1 = value[value.length - 1]
+    const value_right_2 = value[value.length - 2]
+    const value_right_3 = value[value.length - 3]
     if (!value) return value;
-    if ((value.length < 3 && isNaN(value.at(-1))) || value.length === 9) return value.substring(0, value.length - 1);
+    if ((value.length < 3 && isNaN(value_right_1)) || value.length === 9) return value.substring(0, value.length - 1);
     if (value.length > 2) {
         if (
-            (value.at(-2) === ":" && !isNaN(value.at(-3)) && !isNaN(value.at(-1))) ||
-            (value.at(-1) === ":" && !isNaN(value.at(-2)) && !isNaN(value.at(-3))) ||
-            (value.at(-3) === ":" && !isNaN(value.at(-2)) && !isNaN(value.at(-1)))
+            (value_right_2 === ":" && !isNaN(value_right_3) && !isNaN(value_right_1)) ||
+            (value_right_1 === ":" && !isNaN(value_right_2) && !isNaN(value_right_3)) ||
+            (value_right_3 === ":" && !isNaN(value_right_2) && !isNaN(value_right_1))
         )
             return value;
-        if (!isNaN(value.at(-1)) && !isNaN(value.at(-2)) && !isNaN(value.at(-3))) return value.substring(0, value.length - 1) + ":" + value.at(-1);
+        if (!isNaN(value_right_1) && !isNaN(value_right_2) && !isNaN(value_right_3)) return value.substring(0, value.length - 1) + ":" + value_right_1
         return value.substring(0, value.length - 1);
     }
     return value;
